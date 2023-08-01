@@ -151,8 +151,17 @@ int parseData(char *inputFileName, int **ppData)
 	{
 		fscanf(inFile,"%d\n",&dataSz);
 		*ppData = (int *)malloc(sizeof(int) * dataSz);
-		// Implement parse data block
-	}
+		// Counts all the number of data in the files and adds them into the array later on
+    		while(fscanf(inFile, "%d", &num) == 1)
+        		dataSz++;
+    	}
+    	rewind(inFile);
+
+    	for(int i = 0; i < dataSz; i++){
+        	fscanf(inFile, "%d", &(*ppData)[i]);
+    	}
+
+    	fclose(inFile);
 	
 	return dataSz;
 }
